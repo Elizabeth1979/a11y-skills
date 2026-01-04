@@ -5,8 +5,20 @@ applyTo: '**/*.{html,jsx,tsx,vue,svelte}'
 
 # Accessibility Coding Guidelines
 
- .
- 
+## CRITICAL INSTRUCTION
+
+**When making accessibility improvements, modify ONLY the HTML markup and semantic structure. DO NOT change the visual appearance or design of the page.**
+
+- ✅ Add/fix HTML attributes (alt, aria-label, role, etc.)
+- ✅ Change HTML tags to more semantic elements (div → button, div → nav, etc.)
+- ✅ Add or reorganize heading levels (h1, h2, h3, etc.)
+- ✅ Add ARIA attributes and labels
+- ❌ DO NOT modify CSS styles
+- ❌ DO NOT change colors, fonts, sizes, or layout
+- ❌ DO NOT alter the visual design or appearance
+- ❌ DO NOT add or remove visual elements
+
+**The goal is to make the page accessible WITHOUT changing how it looks to sighted users.**
 
 ## Core Principles
 
@@ -24,6 +36,12 @@ This main file references specialized instruction files for specific accessibili
 ### Image Accessibility
 - [Image_labeling.instructions.md](Image_labeling.instructions.md) - Proper alt text and image labeling
 
+### Heading Structure
+- [headings.instructions.md](headings.instructions.md) - Proper heading hierarchy and semantic structure
+
+### Button and Clickable Elements
+- [buttons.instructions.md](buttons.instructions.md) - Proper button accessibility and clickable element handling
+
 ### Additional Areas (To Be Implemented)
 
 Future sub-skills to be added:
@@ -37,12 +55,13 @@ Future sub-skills to be added:
 
 ## General Rules
 
-1. **Use semantic HTML** - Use appropriate HTML elements (`<button>`, `<nav>`, `<main>`, etc.) rather than generic divs
-2. **Keyboard accessibility** - Ensure all interactive elements are keyboard accessible
-3. **Focus indicators** - Never remove focus outlines without providing alternatives
-4. **Color contrast** - Text must meet WCAG contrast ratios (4.5:1 for normal text, 3:1 for large text)
-5. **Error identification** - Clearly identify and describe errors to users
-6. **Labels and instructions** - Provide clear labels for all form inputs
+1. **No visual changes** - Make accessibility improvements through HTML/semantic changes only, NOT through visual design changes
+2. **Use semantic HTML** - Use appropriate HTML elements (`<button>`, `<nav>`, `<main>`, etc.) rather than generic divs
+3. **Keyboard accessibility** - Ensure all interactive elements are keyboard accessible
+4. **Focus indicators** - Never remove focus outlines without providing alternatives
+5. **Color contrast** - Text must meet WCAG contrast ratios (4.5:1 for normal text, 3:1 for large text)
+6. **Error identification** - Clearly identify and describe errors to users
+7. **Labels and instructions** - Provide clear labels for all form inputs
 
 ## Testing Recommendations
 
