@@ -31,27 +31,63 @@ Follow these fundamental accessibility principles:
 
 ## Specific Accessibility Skills
 
-This main file references specialized instruction files for specific accessibility concerns:
+This main file references specialized instruction files for specific accessibility concerns. All widget patterns follow [WAI-ARIA Authoring Practices Guide (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/).
 
-### Image Accessibility
+### Document Structure
+- [headings.instructions.md](headings.instructions.md) - Proper heading hierarchy and semantic structure
+- [landmarks.instructions.md](landmarks.instructions.md) - Page landmarks and regions (banner, navigation, main, complementary, contentinfo, search, form, region)
+- [breadcrumbs.instructions.md](breadcrumbs.instructions.md) - Breadcrumb navigation patterns
+
+### Images and Media
 - [Image_labeling.instructions.md](Image_labeling.instructions.md) - Proper alt text and image labeling
 
-### Heading Structure
-- [headings.instructions.md](headings.instructions.md) - Proper heading hierarchy and semantic structure
+### Buttons and Interactive Elements
+- [buttons.instructions.md](buttons.instructions.md) - Button accessibility and clickable elements
+- [link.instructions.md](link.instructions.md) - Link accessibility and navigation elements
 
-### Button and Clickable Elements
-- [buttons.instructions.md](buttons.instructions.md) - Proper button accessibility and clickable element handling
+### Form Controls and Inputs
+- [checkbox.instructions.md](checkbox.instructions.md) - Checkbox accessibility (dual-state and tri-state)
+- [radio.instructions.md](radio.instructions.md) - Radio button groups (mutually exclusive selection)
+- [switch.instructions.md](switch.instructions.md) - Switch/toggle controls (on/off states)
+- [slider.instructions.md](slider.instructions.md) - Single-thumb slider controls
+- [slider-multithumb.instructions.md](slider-multithumb.instructions.md) - Multi-thumb range sliders
+- [spinbutton.instructions.md](spinbutton.instructions.md) - Number input with increment/decrement
 
-### Additional Areas (To Be Implemented)
+### Selection and Dropdown Patterns
+- [combobox.instructions.md](combobox.instructions.md) - Combobox/autocomplete patterns
+- [listbox.instructions.md](listbox.instructions.md) - Selectable option lists
 
-Future sub-skills to be added:
-- Form accessibility (labels, error handling, validation)
-- Keyboard navigation
-- Focus management
-- Color contrast
-- Semantic HTML
-- ARIA attributes and landmarks
-- Screen reader considerations
+### Menus and Navigation
+- [menu.instructions.md](menu.instructions.md) - Menu and menubar patterns
+- [menu-button.instructions.md](menu-button.instructions.md) - Button that opens a menu
+
+### Disclosure and Expansion Patterns
+- [accordion.instructions.md](accordion.instructions.md) - Vertically stacked collapsible sections
+- [disclosure.instructions.md](disclosure.instructions.md) - Show/hide toggles (expand/collapse)
+- [tabs.instructions.md](tabs.instructions.md) - Layered tabbed content panels
+
+### Dialog and Modal Patterns
+- [dialog-modal.instructions.md](dialog-modal.instructions.md) - Modal dialog accessibility
+- [alertdialog.instructions.md](alertdialog.instructions.md) - Alert dialog for critical messages
+- [tooltip.instructions.md](tooltip.instructions.md) - Tooltip and popup information
+
+### Alerts and Status Messages
+- [alert.instructions.md](alert.instructions.md) - Non-interrupting alert messages
+- [meter.instructions.md](meter.instructions.md) - Meter/gauge displays
+
+### Tables and Data Display
+- [tables.instructions.md](tables.instructions.md) - Proper table structure and semantics
+- [grid.instructions.md](grid.instructions.md) - Interactive data grids with keyboard navigation
+- [treegrid.instructions.md](treegrid.instructions.md) - Hierarchical grids with expandable rows
+
+### Hierarchical and Feed Patterns
+- [treeview.instructions.md](treeview.instructions.md) - Tree view for hierarchical data
+- [feed.instructions.md](feed.instructions.md) - Auto-loading scrollable content feeds
+
+### Layout and Presentation
+- [carousel.instructions.md](carousel.instructions.md) - Carousel/slideshow patterns
+- [toolbar.instructions.md](toolbar.instructions.md) - Toolbar grouping of controls
+- [windowsplitter.instructions.md](windowsplitter.instructions.md) - Resizable pane splitters
 
 ## General Rules
 
