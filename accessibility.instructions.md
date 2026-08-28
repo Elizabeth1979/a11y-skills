@@ -37,21 +37,24 @@ This main file references specialized instruction files for specific accessibili
 - [headings.instructions.md](headings.instructions.md) - Proper heading hierarchy and semantic structure
 - [landmarks.instructions.md](landmarks.instructions.md) - Page landmarks and regions (banner, navigation, main, complementary, contentinfo, search, form, region)
 - [breadcrumbs.instructions.md](breadcrumbs.instructions.md) - Breadcrumb navigation patterns
+- [skip-links.instructions.md](skip-links.instructions.md) - Skip links to bypass repetitive content
 
 ### Images and Media
-- [Image_labeling.instructions.md](Image_labeling.instructions.md) - Proper alt text and image labeling
+- [image-labeling.instructions.md](image-labeling.instructions.md) - Proper alt text and image labeling
 
 ### Buttons and Interactive Elements
 - [buttons.instructions.md](buttons.instructions.md) - Button accessibility and clickable elements
 - [link.instructions.md](link.instructions.md) - Link accessibility and navigation elements
 
 ### Form Controls and Inputs
+- [forms.instructions.md](forms.instructions.md) - Overall form structure, labels, and accessibility patterns
 - [checkbox.instructions.md](checkbox.instructions.md) - Checkbox accessibility (dual-state and tri-state)
 - [radio.instructions.md](radio.instructions.md) - Radio button groups (mutually exclusive selection)
 - [switch.instructions.md](switch.instructions.md) - Switch/toggle controls (on/off states)
 - [slider.instructions.md](slider.instructions.md) - Single-thumb slider controls
 - [slider-multithumb.instructions.md](slider-multithumb.instructions.md) - Multi-thumb range sliders
 - [spinbutton.instructions.md](spinbutton.instructions.md) - Number input with increment/decrement
+- [error-handling.instructions.md](error-handling.instructions.md) - Accessible form validation and error messages
 
 ### Selection and Dropdown Patterns
 - [combobox.instructions.md](combobox.instructions.md) - Combobox/autocomplete patterns
@@ -88,6 +91,14 @@ This main file references specialized instruction files for specific accessibili
 - [carousel.instructions.md](carousel.instructions.md) - Carousel/slideshow patterns
 - [toolbar.instructions.md](toolbar.instructions.md) - Toolbar grouping of controls
 - [windowsplitter.instructions.md](windowsplitter.instructions.md) - Resizable pane splitters
+
+### Keyboard and Focus
+- [focus-management.instructions.md](focus-management.instructions.md) - Managing keyboard focus in dynamic content and SPAs
+- [live-regions.instructions.md](live-regions.instructions.md) - ARIA live regions for announcing dynamic content changes
+
+### Visual Design
+- [color-contrast.instructions.md](color-contrast.instructions.md) - WCAG color contrast requirements and accessible color usage
+- [motion-animation.instructions.md](motion-animation.instructions.md) - Accessible animations and respecting motion preferences
 
 ## General Rules
 
