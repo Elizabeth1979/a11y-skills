@@ -1,0 +1,27 @@
+---
+description: Accessibility patterns (WCAG 2.2 / WAI-ARIA APG) for UI code
+globs: ["**/*.html", "**/*.css", "**/*.scss", "**/*.jsx", "**/*.tsx", "**/*.vue", "**/*.svelte", "**/*.astro"]
+alwaysApply: false
+---
+
+# Accessibility
+
+This project uses the [a11y-skills](https://github.com/Elizabeth1979/a11y-skills) pattern library.
+
+**Route before you read.** Open `patterns/INDEX.md` — it maps a UI element or an audit symptom to
+exactly one pattern file — then read only that file. The 40 pattern files are 8–16 KB each;
+loading them all wastes context.
+
+**Non-negotiable defaults**
+
+- Native HTML before ARIA + JavaScript. An ARIA role is a promise to implement its whole keyboard model.
+- No redundant ARIA (`<button role="button">` is noise).
+- Keyboard-operable, sensible tab order, visible focus indicator on every interactive element.
+- An accessible name on every control.
+- Dynamic changes announced via live region or a deliberate focus move.
+
+**Scope.** Retrofitting an existing page changes markup and ARIA only — no restyling. The
+exceptions are colour contrast and reduced motion, which are inherently visual; fix those in CSS
+and say so.
+
+**Verify.** Run `docs/verification.md`, then report which criteria still need a human pass.

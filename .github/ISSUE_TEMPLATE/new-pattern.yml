@@ -1,0 +1,28 @@
+name: New pattern request
+description: Suggest a widget or concern the library does not yet cover
+labels: ["new-pattern"]
+body:
+  - type: input
+    id: pattern
+    attributes:
+      label: Pattern name
+      placeholder: date-picker
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it is needed
+      description: What do agents get wrong today when they build this without guidance?
+    validations:
+      required: true
+  - type: input
+    id: apg
+    attributes:
+      label: APG pattern, if one exists
+      placeholder: https://www.w3.org/WAI/ARIA/apg/patterns/...
+  - type: textarea
+    id: routing
+    attributes:
+      label: How should it be routed
+      description: What would a developer or an axe finding say that should lead here?

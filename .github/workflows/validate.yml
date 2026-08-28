@@ -1,0 +1,39 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  structure:
+    name: Structure and links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate pattern files
+        run: npm run validate
+
+  manifests:
+    name: Plugin manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse JSON manifests
+        run: |
+          for f in .claude-plugin/plugin.json .claude-plugin/marketplace.json package.json; do
+            python3 -c "import json,sys; json.load(open('$f'))" && echo "ok $f"
+          done
+      - name: Skill frontmatter present
+        run: |
+          head -1 skills/accessibility/SKILL.md | grep -qx -- '---'
+          grep -q '^name: ' skills/accessibility/SKILL.md
+          grep -q '^description: ' skills/accessibility/SKILL.md
+          echo "ok skills/accessibility/SKILL.md"

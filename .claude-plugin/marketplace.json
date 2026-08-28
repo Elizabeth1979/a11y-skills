@@ -1,0 +1,21 @@
+{
+  "name": "a11y-skills",
+  "owner": {
+    "name": "Elizabeth Patrick",
+    "url": "https://github.com/Elizabeth1979"
+  },
+  "metadata": {
+    "description": "Accessibility skills for AI coding agents",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "a11y-skills",
+      "source": "./",
+      "description": "40 routed WCAG 2.2 / WAI-ARIA APG accessibility patterns, loaded on demand so only the relevant one enters context.",
+      "version": "1.0.0",
+      "category": "quality",
+      "keywords": ["accessibility", "a11y", "wcag", "aria"]
+    }
+  ]
+}

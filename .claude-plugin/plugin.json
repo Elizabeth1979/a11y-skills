@@ -1,0 +1,20 @@
+{
+  "name": "a11y-skills",
+  "description": "Accessibility patterns for AI coding agents: 40 routed WCAG 2.2 / WAI-ARIA APG reference files covering every APG widget plus focus, live regions, contrast, and motion.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Elizabeth Patrick"
+  },
+  "homepage": "https://github.com/Elizabeth1979/a11y-skills",
+  "repository": "https://github.com/Elizabeth1979/a11y-skills",
+  "license": "MIT",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "aria",
+    "apg",
+    "screen-reader",
+    "keyboard-navigation"
+  ]
+}

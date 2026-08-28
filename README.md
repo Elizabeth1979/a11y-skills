@@ -1,128 +1,191 @@
-# A11y Skills - Accessibility Coding Agent Instructions
+# a11y-skills
 
-This repository contains a collection of instruction files designed for AI coding agents (like GitHub Copilot, Claude, etc.) to help generate well-formed, accessible code that follows web accessibility best practices.
+**Accessibility patterns that AI coding agents actually load.**
 
-## Purpose
+40 reference files covering every widget in the [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/), plus the cross-cutting concerns the APG leaves out — focus management, live regions, colour contrast, and motion. Each file carries critical rules, correct and incorrect examples, framework snippets, WCAG references, and an implementation checklist.
 
-The goal of this repository is to provide modular, reusable instruction files that coding agents can use to ensure generated code meets accessibility standards (WCAG 2.1/2.2). Each instruction file focuses on a specific aspect of accessibility, making it easy to apply the right guidelines for different scenarios.
+Works with Claude Code, GitHub Copilot, Cursor, and any agent that reads `AGENTS.md`.
 
-## Structure
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![WCAG 2.2](https://img.shields.io/badge/WCAG-2.2%20AA-brightgreen.svg)](https://www.w3.org/WAI/WCAG22/quickref/)
 
-The repository follows a modular approach where:
+---
 
-- **Main skill files** provide overarching guidance for a category (e.g., `accessibility.instructions.md`)
-- **Sub-skill files** provide detailed, specific instructions for particular aspects (e.g., `image-labeling.instructions.md`)
-- All files are written in Markdown format following Claude's instruction file standards
+## Why this exists
 
-## Available Skills (33 Total)
+Ask an agent for a dropdown and you get `<div onClick>`. Ask it for an accessible dropdown and you get `<div onClick aria-label="dropdown">` — ARIA sprinkled on top of a broken keyboard model, which is worse than no ARIA at all, because it now *claims* to be a combobox.
 
-### Core Accessibility
-- **[accessibility.instructions.md](accessibility.instructions.md)** - Main accessibility skill file with WCAG principles and links to all specialized skills
+The fix is not more prompting. It is giving the agent the same reference a senior accessibility engineer would reach for, and giving it at the moment the agent is writing that specific widget.
 
-### Document Structure
-- **[headings.instructions.md](headings.instructions.md)** - Proper heading hierarchy and semantic structure
-- **[landmarks.instructions.md](landmarks.instructions.md)** - Page landmarks and regions (banner, navigation, main, complementary, contentinfo)
-- **[breadcrumbs.instructions.md](breadcrumbs.instructions.md)** - Breadcrumb navigation patterns
-- **[skip-links.instructions.md](skip-links.instructions.md)** - Skip links to bypass repetitive content
+## Install
 
-### Images and Media
-- **[image-labeling.instructions.md](image-labeling.instructions.md)** - Proper alt text, SVG images, and image descriptions
+### Claude Code
 
-### Buttons and Interactive Elements
-- **[buttons.instructions.md](buttons.instructions.md)** - Button accessibility, icon buttons, keyboard support
-- **[link.instructions.md](link.instructions.md)** - Link accessibility and navigation elements
+```bash
+/plugin marketplace add Elizabeth1979/a11y-skills
+/plugin install a11y-skills
+```
 
-### Form Controls and Inputs
-- **[forms.instructions.md](forms.instructions.md)** - Overall form structure, labels, and accessibility patterns
-- **[checkbox.instructions.md](checkbox.instructions.md)** - Checkbox accessibility (dual-state and tri-state)
-- **[radio.instructions.md](radio.instructions.md)** - Radio button groups (mutually exclusive selection)
-- **[switch.instructions.md](switch.instructions.md)** - Switch/toggle controls (on/off states)
-- **[slider.instructions.md](slider.instructions.md)** - Single-thumb slider controls
-- **[slider-multithumb.instructions.md](slider-multithumb.instructions.md)** - Multi-thumb range sliders
-- **[spinbutton.instructions.md](spinbutton.instructions.md)** - Number input with increment/decrement
-- **[error-handling.instructions.md](error-handling.instructions.md)** - Accessible form validation and error messages
+The `accessibility` skill activates on its own whenever you build or review UI. Nothing else to configure.
 
-### Selection and Dropdown Patterns
-- **[combobox.instructions.md](combobox.instructions.md)** - Combobox/autocomplete patterns
-- **[listbox.instructions.md](listbox.instructions.md)** - Selectable option lists
+<details>
+<summary>Or install without the plugin system</summary>
 
-### Menus and Navigation
-- **[menu.instructions.md](menu.instructions.md)** - Menu and menubar patterns
-- **[menu-button.instructions.md](menu-button.instructions.md)** - Button that opens a menu
+```bash
+git clone https://github.com/Elizabeth1979/a11y-skills.git .a11y-skills
+mkdir -p .claude/skills
+cp -r .a11y-skills/skills/accessibility .claude/skills/
+cp -r .a11y-skills/patterns .a11y-skills/docs .
+```
+</details>
 
-### Disclosure and Expansion Patterns
-- **[accordion.instructions.md](accordion.instructions.md)** - Vertically stacked collapsible sections
-- **[disclosure.instructions.md](disclosure.instructions.md)** - Show/hide toggles (expand/collapse)
-- **[tabs.instructions.md](tabs.instructions.md)** - Layered tabbed content panels
+### GitHub Copilot
 
-### Dialog and Modal Patterns
-- **[dialog-modal.instructions.md](dialog-modal.instructions.md)** - Modal dialog accessibility
-- **[alertdialog.instructions.md](alertdialog.instructions.md)** - Alert dialog for critical messages
-- **[tooltip.instructions.md](tooltip.instructions.md)** - Tooltip and popup information
+```bash
+git clone https://github.com/Elizabeth1979/a11y-skills.git .a11y-skills
+cp -r .a11y-skills/patterns .a11y-skills/docs .
+cp .a11y-skills/.github/copilot-instructions.md .github/
+```
 
-### Alerts and Status Messages
-- **[alert.instructions.md](alert.instructions.md)** - Non-interrupting alert messages
-- **[meter.instructions.md](meter.instructions.md)** - Meter/gauge displays
+Copilot reads `.github/copilot-instructions.md` on every request; it routes to the right pattern file from there.
 
-### Tables and Data Display
-- **[tables.instructions.md](tables.instructions.md)** - Proper table structure and semantics
-- **[grid.instructions.md](grid.instructions.md)** - Interactive data grids with keyboard navigation
-- **[treegrid.instructions.md](treegrid.instructions.md)** - Hierarchical grids with expandable rows
+<details>
+<summary>Or use per-file instructions with <code>applyTo</code> globs</summary>
 
-### Hierarchical and Feed Patterns
-- **[treeview.instructions.md](treeview.instructions.md)** - Tree view for hierarchical data
-- **[feed.instructions.md](feed.instructions.md)** - Auto-loading scrollable content feeds
+Every pattern file already carries Copilot frontmatter. Drop the ones you want into `.github/instructions/` and Copilot will scope each to its own glob:
 
-### Layout and Presentation
-- **[carousel.instructions.md](carousel.instructions.md)** - Carousel/slideshow patterns
-- **[toolbar.instructions.md](toolbar.instructions.md)** - Toolbar grouping of controls
-- **[windowsplitter.instructions.md](windowsplitter.instructions.md)** - Resizable pane splitters
+```bash
+mkdir -p .github/instructions
+cp .a11y-skills/patterns/{forms,buttons,dialog-modal}.instructions.md .github/instructions/
+```
 
-### Keyboard and Focus
-- **[focus-management.instructions.md](focus-management.instructions.md)** - Managing keyboard focus in dynamic content and SPAs
-- **[live-regions.instructions.md](live-regions.instructions.md)** - ARIA live regions for announcing dynamic content changes
+This loads those files eagerly on matching edits. Prefer the router above unless you want a small, fixed subset always in context.
+</details>
 
-### Visual Design
-- **[color-contrast.instructions.md](color-contrast.instructions.md)** - WCAG color contrast requirements and accessible color usage
-- **[motion-animation.instructions.md](motion-animation.instructions.md)** - Accessible animations and respecting motion preferences
+### Cursor
 
-## How to Use
+```bash
+git clone https://github.com/Elizabeth1979/a11y-skills.git .a11y-skills
+cp -r .a11y-skills/patterns .a11y-skills/docs .
+mkdir -p .cursor/rules && cp .a11y-skills/.cursor/rules/accessibility.mdc .cursor/rules/
+```
 
-### With Claude or GitHub Copilot
+### Any other agent
 
-1. Add instruction files to your project's `.github/copilot-instructions.md` or similar configuration
-2. Reference specific skill files in your project documentation
-3. Include files as attachments in your coding agent prompts
+Copy `AGENTS.md`, `patterns/`, and `docs/` into your project. `AGENTS.md` is the [agents.md](https://agents.md) convention, read by Codex, Jules, Aider, and a growing list of others.
 
-### File Naming Convention
+### Keeping it updated
 
-All instruction files follow the pattern: `{skill_name}.instructions.md`
+Add the clone as a submodule instead of copying, and `git submodule update --remote` picks up new patterns:
 
-This helps coding agents identify them as instruction/guidance files rather than regular documentation.
+```bash
+git submodule add https://github.com/Elizabeth1979/a11y-skills.git .a11y-skills
+```
+
+## How it works
+
+The library is built around one constraint: **an agent that loads all 40 files writes worse code than one that loads the right one.**
+
+The 40 files total about 500 KB — roughly 130,000 tokens. Dumping that into context buries the twelve rules that matter under thirty-nine files of rules that do not, and it competes for attention with the code the agent is actually editing.
+
+So the entry point is [`patterns/INDEX.md`](patterns/INDEX.md), a routing table:
+
+```
+| If you are building…                        | Open                |
+|---------------------------------------------|---------------------|
+| Autocomplete, typeahead, searchable select   | combobox            |
+| A destructive-action confirmation            | alertdialog         |
+| "axe: form elements must have labels"        | forms               |
+```
+
+The agent reads the index (6 KB), opens the one file it needs (12 KB), and stops. Three routing tables cover the three ways a task arrives: *build this widget*, *handle this page-level concern*, *fix this audit finding*.
+
+That last table matters more than it looks. Most accessibility work in a real codebase starts as an axe violation string pasted into a chat window, not as "please build an accessible combobox".
+
+## What's inside
+
+40 patterns. Full one-line catalog in [`docs/quick-reference.md`](docs/quick-reference.md); routing table in [`patterns/INDEX.md`](patterns/INDEX.md).
+
+<details>
+<summary><strong>Widgets</strong> (31 files)</summary>
+
+| | |
+|---|---|
+| [accordion](patterns/accordion.instructions.md) | Stacked collapsible sections |
+| [alert](patterns/alert.instructions.md) | Non-interrupting status messages |
+| [alertdialog](patterns/alertdialog.instructions.md) | Destructive-action confirmations |
+| [breadcrumbs](patterns/breadcrumbs.instructions.md) | Hierarchical trail navigation |
+| [buttons](patterns/buttons.instructions.md) | Actions, icon buttons, toggle buttons |
+| [carousel](patterns/carousel.instructions.md) | Slideshows and auto-rotation |
+| [checkbox](patterns/checkbox.instructions.md) | Dual-state and tri-state |
+| [combobox](patterns/combobox.instructions.md) | Autocomplete and typeahead |
+| [dialog-modal](patterns/dialog-modal.instructions.md) | Modals, drawers, overlays |
+| [disclosure](patterns/disclosure.instructions.md) | Single show/hide toggles |
+| [feed](patterns/feed.instructions.md) | Infinite scroll and auto-loading streams |
+| [grid](patterns/grid.instructions.md) | Interactive data grids |
+| [link](patterns/link.instructions.md) | Links, and link-versus-button |
+| [listbox](patterns/listbox.instructions.md) | Selectable option lists |
+| [menu](patterns/menu.instructions.md) | Menus and menubars |
+| [menu-button](patterns/menu-button.instructions.md) | Buttons that open menus |
+| [meter](patterns/meter.instructions.md) | Gauges, ratings, capacity displays |
+| [radio](patterns/radio.instructions.md) | Mutually exclusive option groups |
+| [slider](patterns/slider.instructions.md) | Single-value sliders |
+| [slider-multithumb](patterns/slider-multithumb.instructions.md) | Two-thumb range sliders |
+| [spinbutton](patterns/spinbutton.instructions.md) | Number inputs with steppers |
+| [switch](patterns/switch.instructions.md) | On/off toggles |
+| [tables](patterns/tables.instructions.md) | Static data tables |
+| [tabs](patterns/tabs.instructions.md) | Tabbed panels |
+| [toolbar](patterns/toolbar.instructions.md) | Grouped control rows |
+| [tooltip](patterns/tooltip.instructions.md) | Hover and focus tooltips |
+| [treegrid](patterns/treegrid.instructions.md) | Grids with expandable rows |
+| [treeview](patterns/treeview.instructions.md) | File trees and nested navigation |
+| [windowsplitter](patterns/windowsplitter.instructions.md) | Resizable split panes |
+| [forms](patterns/forms.instructions.md) | Form structure, labels, fieldsets |
+| [error-handling](patterns/error-handling.instructions.md) | Validation and error messaging |
+</details>
+
+<details>
+<summary><strong>Page structure and cross-cutting concerns</strong> (9 files)</summary>
+
+| | |
+|---|---|
+| [accessibility](patterns/accessibility.instructions.md) | General rules and scope discipline |
+| [headings](patterns/headings.instructions.md) | Document outline, `h1`–`h6` order |
+| [landmarks](patterns/landmarks.instructions.md) | Page regions and the eight landmark roles |
+| [skip-links](patterns/skip-links.instructions.md) | Bypassing repeated navigation |
+| [image-labeling](patterns/image-labeling.instructions.md) | Alt text, SVG, decorative images |
+| [focus-management](patterns/focus-management.instructions.md) | Focus in SPAs, modals, dynamic content |
+| [live-regions](patterns/live-regions.instructions.md) | Announcing async change |
+| [color-contrast](patterns/color-contrast.instructions.md) | WCAG ratios and accessible palettes |
+| [motion-animation](patterns/motion-animation.instructions.md) | `prefers-reduced-motion`, autoplay |
+</details>
+
+## Verifying the agent's work
+
+[`docs/verification.md`](docs/verification.md) covers the checks an agent can actually run — `eslint-plugin-jsx-a11y`, axe-core in Playwright or Vitest, accessibility-tree snapshots, mechanical keyboard assertions — and, just as importantly, where those checks stop.
+
+Automated tooling detects roughly a third of WCAG failures. It can tell you alt text exists; it cannot tell you the alt text is right. It can tell you a live region is present; it cannot tell you the announcement is useful. The library asks agents to report which criteria they verified mechanically and which still need a human keyboard or screen-reader pass, rather than declaring a component "WCAG AA compliant" off a green axe run.
+
+## What this is not
+
+- **Not a compliance guarantee.** It is a reference that makes good output likelier, not a certification.
+- **Not a replacement for testing with disabled users.** Nothing in a pattern file tells you whether your product is usable, only whether it is conformant.
+- **Not a linter.** It changes what the agent writes; `docs/verification.md` covers checking what it wrote.
 
 ## Contributing
 
-When adding new accessibility skills:
+New patterns, corrections, and framework examples are all welcome — corrections most of all. See [CONTRIBUTING.md](CONTRIBUTING.md) for the file format and the review bar. `npm run validate` enforces the mechanical parts (frontmatter, structure, links, index coverage) and runs in CI.
 
-1. Create a new `.instructions.md` file for the specific skill
-2. Follow the standard format (see existing files for examples)
-3. Include:
-   - Clear description and rules
-   - Code examples (good and bad)
-   - WCAG references where applicable
-   - Edge cases and exceptions
-4. Update this README with links to new skills
+Planned work is in [ROADMAP.md](ROADMAP.md).
 
-## Standards Referenced
+## Standards
 
-- [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/)
-- [WCAG 2.2](https://www.w3.org/WAI/WCAG22/quickref/)
-- [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
+- [WCAG 2.2](https://www.w3.org/WAI/WCAG22/quickref/) — the current W3C Recommendation
+- [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/) — widget keyboard models
+- [ARIA in HTML](https://www.w3.org/TR/html-aria/) — which roles are valid where
+
+Pattern content is original prose written against these specifications. Where an example follows an APG reference implementation, the pattern file names the APG pattern it derives from.
 
 ## License
 
-[Add your license here]
-
-## Feedback
-
-Found an issue or want to suggest a new accessibility skill? Please open an issue or submit a pull request.
+[MIT](LICENSE).

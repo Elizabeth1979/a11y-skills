@@ -6,6 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-08-28 - Open source release
+
+First release intended for public use. The library was previously 40 files in the repository
+root with no license, no contribution path, and no way for an agent to find the right one.
+
+### Added
+- `LICENSE` (MIT) — the repository was not legally open source before this
+- `patterns/INDEX.md` — routing table mapping a UI element, a page-level concern, or an axe
+  finding to exactly one pattern file
+- `skills/accessibility/SKILL.md` and `.claude-plugin/` — installable Claude Code plugin
+- `.github/copilot-instructions.md` — GitHub Copilot router
+- `.cursor/rules/accessibility.mdc` — Cursor router
+- `AGENTS.md` — cross-agent entry point following the agents.md convention
+- `docs/verification.md` — automated checks an agent can actually run, and an explicit statement
+  of where automation stops
+- `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, issue templates, pull request template
+- `scripts/validate.mjs` and a CI workflow — validates frontmatter, required sections, kebab-case
+  naming, every relative link, catalog coverage, and stated counts
+- `ROADMAP.md` — phased plan, including an evaluation harness to measure whether the patterns
+  change agent output
+- `.gitignore`, `.editorconfig`, `package.json`
+
+### Changed
+- **Restructured**: the 40 pattern files moved from the repository root to `patterns/`;
+  `QUICK-REFERENCE.md` moved to `docs/quick-reference.md`
+- **`README.md`** rewritten around installation and usage rather than a file listing, with
+  per-ecosystem install instructions and an explanation of why routing matters
+- **`CLAUDE.md`** rewritten — it previously described a `src/`, `tests/`, `package.json` structure
+  that has never existed in this repository
+- **`patterns/accessibility.instructions.md`**: the global "DO NOT modify CSS" instruction is now
+  scoped to a named remediation mode, with colour contrast and reduced motion called out as the
+  two failures that cannot be fixed in markup. Previously it contradicted two of the library's
+  own patterns.
+- Testing guidance now points at runnable checks instead of "verify with a screen reader", which
+  a coding agent cannot do
+
+### Fixed
+- `README.md` claimed 33 skills while listing and shipping 40; counts are now validated in CI
+
+
 ## [2025-01-13] - Repository Improvements
 
 ### Added
