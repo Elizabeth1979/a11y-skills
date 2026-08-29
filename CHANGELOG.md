@@ -6,6 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- **WCAG 2.2 coverage at Level A and AA.** The library badged itself WCAG 2.2 while covering
+  none of the nine criteria 2.2 actually added. Three new patterns close the gap:
+  - `patterns/target-size.instructions.md` — 2.5.8 Target Size (Minimum), AA, and the five exceptions
+  - `patterns/dragging-movements.instructions.md` — 2.5.7 Dragging Movements, AA
+  - `patterns/authentication.instructions.md` — 3.3.8 Accessible Authentication, AA, and 3.3.7 Redundant Entry, A
+- 2.4.11 Focus Not Obscured added to `focus-management`; 3.2.6 Consistent Help added to
+  `landmarks`; 3.3.7 cross-referenced from `forms`
+- 2.5.8 and 2.5.7 cross-referenced into the fourteen widget patterns they govern
+- README now states what the WCAG badge means, criterion by criterion, and what it does not mean
+
+### Fixed
+- **The count validator never checked README.** Its regex matched only "N pattern files", a
+  phrasing that appears in `AGENTS.md` alone — so the file where the original 33-vs-40 drift
+  happened was the one file left unguarded. It now checks six files and 17 count claims, and
+  fails if the regexes stop matching anything.
+- **Cross-router duplication.** The shared rules were copied into all four routers, against this
+  repository's own "routers point, they do not teach" rule. They now live once, in
+  `patterns/accessibility.instructions.md`, and the routers link to it.
+- `LICENSE` named one inferred person; it now names both repository owners, Elizabeth Patrick
+  and Shmuel Naaman, with a 2025-2026 range matching the first commit
+- Size and token figures in `README.md`, `AGENTS.md`, and `CLAUDE.md` are now measured rather
+  than estimated (512 KB, ~131,000 tokens across 43 files)
+
+
 ## [1.0.0] - 2026-08-28 - Open source release
 
 First release intended for public use. The library was previously 40 files in the repository

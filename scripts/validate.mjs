@@ -86,11 +86,38 @@ for (const name of patterns) {
 /* ---------- 4. Stated counts match reality ---------- */
 
 const count = patterns.length;
-for (const [label, file] of [['README.md', join(root, 'README.md')], ['AGENTS.md', join(root, 'AGENTS.md')]]) {
+
+/* The first version of this check looked only for "N pattern files", which matched
+ * AGENTS.md and nothing else — README states its count four different ways, so the
+ * file where the original 33-vs-40 drift happened was the one file left unguarded.
+ * Enumerate the phrasings instead of trying to be clever about prose. */
+const countClaims = [
+  /(\d+)\s+(?:accessibility\s+)?(?:reference|pattern|markdown pattern)\s+files?/gi,
+  /(?:all|of)\s+(\d+)\s+patterns?\b/gi,
+  /^(\d+)\s+patterns\b/gim,
+  /(?:all|The)\s+(\d+)\s+files\b/gi,
+  /catalog of all\s+(\d+)/gi,
+  /Loading all\s+(\d+)\s+costs/gi,
+  /reference of\s+(\d+)/gi,
+];
+
+let claimsChecked = 0;
+for (const rel of ['README.md', 'AGENTS.md', 'CLAUDE.md', 'skills/accessibility/SKILL.md',
+                   '.github/copilot-instructions.md', '.cursor/rules/accessibility.mdc']) {
+  const file = join(root, rel);
+  if (!existsSync(file)) continue;
   const text = readFileSync(file, 'utf8');
-  for (const [, stated] of text.matchAll(/(\d+)\s+(?:accessibility\s+)?pattern files?/gi)) {
-    if (Number(stated) !== count) fail(file, `claims ${stated} pattern files, found ${count}`);
+  for (const re of countClaims) {
+    for (const [match, stated] of text.matchAll(re)) {
+      claimsChecked += 1;
+      if (Number(stated) !== count) {
+        fail(file, `claims ${stated} where the real pattern count is ${count} — "${match.trim()}"`);
+      }
+    }
   }
+}
+if (claimsChecked === 0) {
+  fail(join(root, 'scripts/validate.mjs'), 'count check matched nothing — the regexes have drifted from the prose');
 }
 
 /* ---------- Report ---------- */
@@ -101,4 +128,4 @@ if (errors.length) {
   console.error('');
   process.exit(1);
 }
-console.log(`✓ ${count} pattern files valid: frontmatter, structure, links, index and catalog coverage.`);
+console.log(`✓ ${count} pattern files valid: frontmatter, structure, links, index and catalog coverage, ${claimsChecked} count claims.`);

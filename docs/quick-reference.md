@@ -91,6 +91,17 @@ One-line summaries of all accessibility skills in this repository. Use this to q
 | [focus-management](../patterns/focus-management.instructions.md) | Managing focus in SPAs, modals, and dynamic content |
 | [live-regions](../patterns/live-regions.instructions.md) | Announcing changes with `aria-live` and `role="status"` |
 
+## Pointer and Input (WCAG 2.2)
+| Skill | Description |
+|-------|-------------|
+| [target-size](../patterns/target-size.instructions.md) | 24x24 minimum pointer targets and the five exceptions |
+| [dragging-movements](../patterns/dragging-movements.instructions.md) | Single-pointer alternatives to every drag interaction |
+
+## Authentication and Multi-Step Forms (WCAG 2.2)
+| Skill | Description |
+|-------|-------------|
+| [authentication](../patterns/authentication.instructions.md) | Accessible authentication, paste-friendly credentials, redundant entry |
+
 ## Visual Design
 | Skill | Description |
 |-------|-------------|

@@ -326,6 +326,7 @@ function selectItem(item) {
 - **WCAG 2.1 Success Criterion 1.3.1**: Info and Relationships (Level A)
 - **WCAG 2.1 Success Criterion 2.1.1**: Keyboard (Level A)
 - **WCAG 2.1 Success Criterion 4.1.2**: Name, Role, Value (Level A)
+- **WCAG 2.2 Success Criterion 2.5.7**: Dragging Movements (Level AA) — see [dragging-movements.instructions.md](dragging-movements.instructions.md)
 
 ## Implementation Checklist
 

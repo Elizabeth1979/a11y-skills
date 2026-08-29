@@ -5,16 +5,15 @@ pattern library. Apply it to every change that touches user interface code.
 
 ## Routing
 
-Do not read all 40 pattern files. Open `patterns/INDEX.md` first — it maps a UI element or an
+Do not read all 43 pattern files. Open `patterns/INDEX.md` first — it maps a UI element or an
 audit finding to exactly one file — then read only that file.
 
 ## Always apply
 
-- Use native HTML elements before ARIA-plus-JavaScript reimplementations.
-- Do not add redundant ARIA to elements that already carry the semantics.
-- Every interactive element must be keyboard-operable with a visible focus indicator.
-- Every control must have an accessible name.
-- Announce dynamic changes with a live region or a deliberate focus move.
+Read the "The Non-Negotiables" section of `patterns/accessibility.instructions.md` — eleven rules
+that hold for every UI change, kept in that one file so they cannot drift. The shortest version:
+**use native HTML before reaching for ARIA**, because an ARIA role is a promise to implement its
+whole keyboard model.
 
 ## Scope
 

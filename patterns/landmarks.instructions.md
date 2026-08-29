@@ -533,11 +533,71 @@ function PageLayout({ children }) {
 </nav>
 ```
 
+## Consistent Help (WCAG 2.2)
+
+**Success Criterion 3.2.6 Consistent Help, Level A, is new in WCAG 2.2: if a help mechanism
+repeats across pages, it must appear in the same relative order each time.**
+
+"Help mechanism" means human contact details, a human contact mechanism, self-help options, or
+an automated contact mechanism — a phone number, a contact form, a chat launcher, a link to a
+help page or FAQ.
+
+The criterion is about *findability*. Someone who needs help should not have to hunt for the
+help link in a different place on every page.
+
+```html
+<!-- Good - help sits last in the primary navigation on every page -->
+<header>
+  <nav aria-label="Main">
+    <ul>
+      <li><a href="/products">Products</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/help">Help</a></li>   <!-- always last -->
+    </ul>
+  </nav>
+</header>
+
+<!-- Bad - the same links, reordered per page -->
+<!-- /products:  Products | Help | Pricing  -->
+<!-- /pricing:   Products | Pricing | Help  -->
+<!-- The help link moves. Relative order is not consistent. -->
+```
+
+**What "same relative order" means:**
+
+- The help mechanism keeps its position *relative to the other content*, not an identical pixel
+  position. A responsive layout that moves it is fine.
+- Pages may omit it entirely — the criterion only constrains pages where it *does* appear.
+- A chat widget pinned bottom-right on every page satisfies this, as long as it is bottom-right
+  on every page.
+
+```html
+<!-- Good - put it in a landmark so it is reachable, and keep it there -->
+<footer>
+  <nav aria-label="Support">
+    <ul>
+      <li><a href="/help">Help centre</a></li>
+      <li><a href="/contact">Contact us</a></li>
+      <li><a href="tel:+441234567890">Call 01234 567890</a></li>
+    </ul>
+  </nav>
+</footer>
+```
+
+Put the help mechanism inside a landmark — `banner`, `contentinfo`, or a labelled `navigation` —
+so that a screen reader user can jump to it directly rather than reading to find it. That is not
+required by 3.2.6, but it is what makes the consistency useful.
+
+Consistency is a property of the *template*, not of any one page. If help lives in the shared
+header or footer component, this criterion is satisfied structurally and stays satisfied.
+
 ## WCAG References
 
 - **WCAG 2.1 Success Criterion 1.3.1**: Info and Relationships (Level A)
 - **WCAG 2.1 Success Criterion 2.4.1**: Bypass Blocks (Level A)
 - **WCAG 2.1 Success Criterion 2.4.6**: Headings and Labels (Level AA)
+- **WCAG 2.2 Success Criterion 3.2.6**: Consistent Help (Level A) — new in WCAG 2.2
+- **WCAG 2.1 Success Criterion 3.2.3**: Consistent Navigation (Level AA)
 
 ## Implementation Checklist
 
