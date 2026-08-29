@@ -1,0 +1,36 @@
+name: Pattern correction
+description: Report guidance that is wrong, outdated, or misleading
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Corrections matter most here. Wrong guidance produces confidently broken code in every
+        project that installs this library. Please report it even if you have no fix in mind.
+  - type: input
+    id: file
+    attributes:
+      label: Which pattern file
+      placeholder: patterns/combobox.instructions.md
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+      description: Quote the guidance and explain what it gets wrong.
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: What it should say
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Spec link, APG section, or observed AT behaviour (name the screen reader, version, and browser).
+    validations:
+      required: false

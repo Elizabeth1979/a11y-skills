@@ -5,20 +5,33 @@ applyTo: '**/*.{html,jsx,tsx,vue,svelte}'
 
 # Accessibility Coding Guidelines
 
-## CRITICAL INSTRUCTION
+## SCOPE: pick a mode before you edit
 
-**When making accessibility improvements, modify ONLY the HTML markup and semantic structure. DO NOT change the visual appearance or design of the page.**
+Accessibility work arrives in two shapes, and they have different rules about touching CSS.
+State which mode you are in before changing anything.
 
-- ✅ Add/fix HTML attributes (alt, aria-label, role, etc.)
-- ✅ Change HTML tags to more semantic elements (div → button, div → nav, etc.)
-- ✅ Add or reorganize heading levels (h1, h2, h3, etc.)
-- ✅ Add ARIA attributes and labels
-- ❌ DO NOT modify CSS styles
-- ❌ DO NOT change colors, fonts, sizes, or layout
-- ❌ DO NOT alter the visual design or appearance
-- ❌ DO NOT add or remove visual elements
+### Remediation mode — retrofitting an existing page
 
-**The goal is to make the page accessible WITHOUT changing how it looks to sighted users.**
+The page already has a visual design that someone approved. Your job is to fix what assistive
+technology receives, **without changing what sighted users see.**
+
+- ✅ Add or fix HTML attributes (`alt`, `aria-label`, `role`, `for`, `id`)
+- ✅ Swap generic elements for semantic ones (`div` → `button`, `div` → `nav`)
+- ✅ Add or correct heading levels
+- ✅ Add landmarks, labels, and live regions
+- ❌ Do not restyle, re-lay-out, or change colours, fonts, or sizes
+- ❌ Do not add or remove visual elements
+
+**Two exceptions.** Insufficient colour contrast and animation that ignores
+`prefers-reduced-motion` are failures that exist *in the CSS* and cannot be fixed in markup. Fix
+those in CSS, keep the change as small as the criterion requires, and say explicitly that you
+changed the appearance and why. See [color-contrast.instructions.md](color-contrast.instructions.md)
+and [motion-animation.instructions.md](motion-animation.instructions.md).
+
+### Greenfield mode — building something new
+
+Visual design and accessibility are decided together. CSS is in scope from the start: focus
+indicators, contrast, target size, and motion are design decisions, not retrofits.
 
 ## Core Principles
 
@@ -31,7 +44,11 @@ Follow these fundamental accessibility principles:
 
 ## Specific Accessibility Skills
 
-This main file references specialized instruction files for specific accessibility concerns. All widget patterns follow [WAI-ARIA Authoring Practices Guide (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/).
+**Route through [INDEX.md](INDEX.md) rather than reading this list top to bottom.** It maps a UI
+element, a page-level concern, or an axe finding to exactly one file. Open that one file and stop —
+these average 12 KB each, and loading them all buries the rules that matter.
+
+All widget patterns follow the [WAI-ARIA Authoring Practices Guide (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/).
 
 ### Document Structure
 - [headings.instructions.md](headings.instructions.md) - Proper heading hierarchy and semantic structure
@@ -102,7 +119,7 @@ This main file references specialized instruction files for specific accessibili
 
 ## General Rules
 
-1. **No visual changes** - Make accessibility improvements through HTML/semantic changes only, NOT through visual design changes
+1. **Respect the mode** - In remediation mode, work through markup and ARIA only; the two CSS exceptions above are the whole list
 2. **Use semantic HTML** - Use appropriate HTML elements (`<button>`, `<nav>`, `<main>`, etc.) rather than generic divs
 3. **Keyboard accessibility** - Ensure all interactive elements are keyboard accessible
 4. **Focus indicators** - Never remove focus outlines without providing alternatives
@@ -112,12 +129,15 @@ This main file references specialized instruction files for specific accessibili
 
 ## Testing Recommendations
 
-When generating code, consider these testing approaches:
-- Test with keyboard only (no mouse)
-- Verify with screen reader (NVDA, JAWS, VoiceOver)
-- Check color contrast ratios
-- Validate HTML semantics
-- Run automated accessibility audits (axe, Lighthouse)
+Run what you can and report the boundary honestly. [../docs/verification.md](../docs/verification.md)
+has the runnable checks — `eslint-plugin-jsx-a11y`, axe-core in Playwright or Vitest,
+accessibility-tree snapshots, mechanical keyboard assertions.
+
+Automated tooling detects roughly a third of WCAG failures. It confirms alt text exists; it cannot
+confirm the alt text is accurate. It confirms a live region is present; it cannot confirm the
+announcement is useful. When you finish, state which criteria you verified mechanically and which
+still need a human keyboard pass or screen-reader pass. Do not call a component "WCAG AA compliant"
+on the strength of a clean axe run.
 
 ## Resources
 
