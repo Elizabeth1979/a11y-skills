@@ -452,6 +452,24 @@ export default {
 <button type="reset">Reset</button>
 ```
 
+## Redundant Entry (WCAG 2.2)
+
+**Success Criterion 3.3.7 Redundant Entry, Level A, is new in WCAG 2.2: within one process,
+information the user already entered must be auto-populated or offered for selection rather than
+requested again.**
+
+Multi-step checkouts, booking flows, and wizards are where this is failed. See
+[authentication.instructions.md](authentication.instructions.md) for the full treatment,
+including the essential and security exceptions.
+
+```html
+<!-- Good - offer the earlier answer instead of demanding it again -->
+<label>
+  <input type="checkbox" id="same-as-shipping" checked>
+  Billing address is the same as shipping
+</label>
+```
+
 ## WCAG References
 
 - **WCAG 2.1 Success Criterion 1.3.1**: Info and Relationships (Level A)

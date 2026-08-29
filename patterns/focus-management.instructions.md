@@ -419,6 +419,71 @@ export default {
 </script>
 ```
 
+## Focus Not Obscured (WCAG 2.2)
+
+**Success Criterion 2.4.11 Focus Not Obscured (Minimum), Level AA, is new in WCAG 2.2: when an
+element receives keyboard focus, it must not be entirely hidden by author-created content.**
+
+The usual culprit is a sticky header, sticky footer, or cookie banner that covers the focused
+element as the user tabs down the page. The element has focus and a visible focus ring — under
+the sticky bar, where nobody can see it.
+
+```css
+/* Bad - a sticky header that swallows focused elements */
+.site-header {
+  position: sticky;
+  top: 0;
+  height: 64px;
+}
+/* Tabbing to a link just under the header scrolls it to the top of the
+   viewport, directly beneath the header. The focus ring is invisible. */
+
+/* Good - reserve the header's height as scroll padding */
+html {
+  scroll-padding-top: 64px;    /* matches the sticky header */
+  scroll-padding-bottom: 72px; /* matches a sticky footer or cookie bar */
+}
+```
+
+`scroll-padding` is the one-line fix for the overwhelming majority of 2.4.11 failures: the
+browser stops scrolling short, so the focused element lands below the sticky bar rather than
+under it.
+
+```css
+/* Good - keep the value in sync with the header via a custom property */
+:root { --header-height: 64px; }
+
+.site-header { position: sticky; top: 0; block-size: var(--header-height); }
+html { scroll-padding-block-start: var(--header-height); }
+```
+
+**Other things that obscure focus:**
+
+- Cookie consent bars pinned to the bottom — the last few focusable elements land behind them
+- Chat widgets and floating action buttons over the bottom-right corner
+- Sticky table headers covering the first focusable cell in a scrolled region
+- A non-modal popover that stays open while focus moves past it
+
+**A dialog covering the page is not a violation.** If the focused element is inside the dialog,
+nothing is obscuring it. 2.4.11 is about content the *author* placed over a focused element the
+user moved to.
+
+```js
+// Verify mechanically: the focused element must be within the viewport
+// and not covered at its own centre point.
+const obscured = await page.evaluate(() => {
+  const el = document.activeElement;
+  const r = el.getBoundingClientRect();
+  const topmost = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+  return !el.contains(topmost) && topmost !== el;
+});
+expect(obscured).toBe(false);
+```
+
+**Related criteria at Level AAA:** 2.4.12 Focus Not Obscured (Enhanced) requires that *no part*
+of the focused element is hidden, and 2.4.13 Focus Appearance sets a minimum size and contrast
+for the focus indicator itself.
+
 ## Common Mistakes
 
 ### Not Returning Focus After Modal Close
@@ -467,6 +532,9 @@ element.focus();
 - **WCAG 2.1 Success Criterion 2.4.3**: Focus Order (Level A)
 - **WCAG 2.1 Success Criterion 2.4.7**: Focus Visible (Level AA)
 - **WCAG 2.1 Success Criterion 3.2.1**: On Focus (Level A)
+- **WCAG 2.2 Success Criterion 2.4.11**: Focus Not Obscured (Minimum) (Level AA) — new in WCAG 2.2
+- **WCAG 2.2 Success Criterion 2.4.12**: Focus Not Obscured (Enhanced) (Level AAA) — new in WCAG 2.2
+- **WCAG 2.2 Success Criterion 2.4.13**: Focus Appearance (Level AAA) — new in WCAG 2.2
 
 ## Implementation Checklist
 

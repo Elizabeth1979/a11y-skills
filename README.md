@@ -2,12 +2,12 @@
 
 **Accessibility patterns that AI coding agents actually load.**
 
-40 reference files covering every widget in the [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/), plus the cross-cutting concerns the APG leaves out — focus management, live regions, colour contrast, and motion. Each file carries critical rules, correct and incorrect examples, framework snippets, WCAG references, and an implementation checklist.
+43 reference files covering every widget in the [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/), plus the cross-cutting concerns the APG leaves out — focus management, live regions, colour contrast, and motion. Each file carries critical rules, correct and incorrect examples, framework snippets, WCAG references, and an implementation checklist.
 
 Works with Claude Code, GitHub Copilot, Cursor, and any agent that reads `AGENTS.md`.
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![WCAG 2.2](https://img.shields.io/badge/WCAG-2.2%20AA-brightgreen.svg)](https://www.w3.org/WAI/WCAG22/quickref/)
+[![WCAG 2.2 A/AA covered](https://img.shields.io/badge/WCAG%202.2-A%2FAA%20covered-blue.svg)](https://www.w3.org/WAI/WCAG22/quickref/)
 
 ---
 
@@ -84,9 +84,9 @@ git submodule add https://github.com/Elizabeth1979/a11y-skills.git .a11y-skills
 
 ## How it works
 
-The library is built around one constraint: **an agent that loads all 40 files writes worse code than one that loads the right one.**
+The library is built around one constraint: **an agent that loads all 43 files writes worse code than one that loads the right one.**
 
-The 40 files total about 500 KB — roughly 130,000 tokens. Dumping that into context buries the twelve rules that matter under thirty-nine files of rules that do not, and it competes for attention with the code the agent is actually editing.
+The 43 files total about 512 KB — roughly 131,000 tokens. Dumping that into context buries the twelve rules that matter under forty-two files of rules that do not, and it competes for attention with the code the agent is actually editing.
 
 So the entry point is [`patterns/INDEX.md`](patterns/INDEX.md), a routing table:
 
@@ -104,7 +104,7 @@ That last table matters more than it looks. Most accessibility work in a real co
 
 ## What's inside
 
-40 patterns. Full one-line catalog in [`docs/quick-reference.md`](docs/quick-reference.md); routing table in [`patterns/INDEX.md`](patterns/INDEX.md).
+43 patterns. Full one-line catalog in [`docs/quick-reference.md`](docs/quick-reference.md); routing table in [`patterns/INDEX.md`](patterns/INDEX.md).
 
 <details>
 <summary><strong>Widgets</strong> (31 files)</summary>
@@ -142,6 +142,7 @@ That last table matters more than it looks. Most accessibility work in a real co
 | [windowsplitter](patterns/windowsplitter.instructions.md) | Resizable split panes |
 | [forms](patterns/forms.instructions.md) | Form structure, labels, fieldsets |
 | [error-handling](patterns/error-handling.instructions.md) | Validation and error messaging |
+| [authentication](patterns/authentication.instructions.md) | Sign-in, two-factor, redundant entry |
 </details>
 
 <details>
@@ -158,6 +159,8 @@ That last table matters more than it looks. Most accessibility work in a real co
 | [live-regions](patterns/live-regions.instructions.md) | Announcing async change |
 | [color-contrast](patterns/color-contrast.instructions.md) | WCAG ratios and accessible palettes |
 | [motion-animation](patterns/motion-animation.instructions.md) | `prefers-reduced-motion`, autoplay |
+| [target-size](patterns/target-size.instructions.md) | 24x24 pointer targets and the five exceptions |
+| [dragging-movements](patterns/dragging-movements.instructions.md) | Single-pointer alternatives to dragging |
 </details>
 
 ## Verifying the agent's work
@@ -183,6 +186,31 @@ Planned work is in [ROADMAP.md](ROADMAP.md).
 - [WCAG 2.2](https://www.w3.org/WAI/WCAG22/quickref/) — the current W3C Recommendation
 - [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/) — widget keyboard models
 - [ARIA in HTML](https://www.w3.org/TR/html-aria/) — which roles are valid where
+
+### What the WCAG 2.2 badge means
+
+It means every criterion WCAG 2.2 *added* at Level A and AA has a pattern that covers it. It does
+not mean your product conforms — no document can do that.
+
+WCAG 2.2 introduced nine criteria. Where they live here:
+
+| Criterion | Level | Covered in |
+|---|---|---|
+| 2.4.11 Focus Not Obscured (Minimum) | AA | [focus-management](patterns/focus-management.instructions.md) |
+| 2.5.7 Dragging Movements | AA | [dragging-movements](patterns/dragging-movements.instructions.md) |
+| 2.5.8 Target Size (Minimum) | AA | [target-size](patterns/target-size.instructions.md) |
+| 3.2.6 Consistent Help | A | [landmarks](patterns/landmarks.instructions.md) |
+| 3.3.7 Redundant Entry | A | [authentication](patterns/authentication.instructions.md) |
+| 3.3.8 Accessible Authentication (Minimum) | AA | [authentication](patterns/authentication.instructions.md) |
+| 2.4.12 Focus Not Obscured (Enhanced) | AAA | noted, not covered in depth |
+| 2.4.13 Focus Appearance | AAA | noted, not covered in depth |
+| 3.3.9 Accessible Authentication (Enhanced) | AAA | noted, not covered in depth |
+
+The AAA criteria are named where relevant but not developed — the badge claims A/AA, and that is
+what the patterns deliver.
+
+Individual pattern files cite criteria as "WCAG 2.1" where the criterion originated in 2.1 and
+carries into 2.2 unchanged. That is accurate, not stale.
 
 Pattern content is original prose written against these specifications. Where an example follows an APG reference implementation, the pattern file names the APG pattern it derives from.
 

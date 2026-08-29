@@ -5,7 +5,7 @@ description: Write or fix accessible web UI following WCAG 2.2 and the WAI-ARIA 
 
 # Accessibility Patterns
 
-A routed reference of 40 accessibility pattern files covering every WAI-ARIA APG widget
+A routed reference of 43 accessibility pattern files covering every WAI-ARIA APG widget
 plus cross-cutting concerns (focus, live regions, contrast, motion).
 
 ## How to use this skill
@@ -26,22 +26,13 @@ each widget, rather than loading them all up front.
 
 ## Non-negotiable defaults
 
-These hold regardless of which pattern file you load:
+Eleven rules hold regardless of which pattern file you load — native HTML before ARIA, no
+redundant ARIA, keyboard operability, visible focus, an accessible name on every control,
+announced change, 24x24 pointer targets, and so on.
 
-- **Native HTML first.** Reach for `<button>`, `<a href>`, `<input>`, `<select>`,
-  `<details>`, `<dialog>` before any `role=` + JavaScript reimplementation. An ARIA
-  widget is a promise to implement its full keyboard model; a native element is that
-  model for free.
-- **No redundant ARIA.** `<button role="button">` and `<nav role="navigation">` are
-  noise. Add ARIA only where the native semantics fall short.
-- **Every interactive element is keyboard-operable**, reachable in a sensible order,
-  and shows a visible focus indicator. Never remove an outline without replacing it.
-- **Every control has an accessible name** — visible text, `<label for>`,
-  `aria-label`, or `aria-labelledby`.
-- **Dynamic changes are announced.** If something appears, updates, or fails without a
-  page load, a screen reader user needs a live region or a moved focus.
-- **`aria-hidden` is never a security or access-control mechanism.** It hides from
-  assistive technology only.
+**They live in one place: the "The Non-Negotiables" section of
+`patterns/accessibility.instructions.md`.** Read it once at the start of accessibility work.
+It is not restated here, because a rule that lives in four files drifts in four directions.
 
 ## Scope discipline
 
@@ -72,6 +63,6 @@ workspace for `INDEX.md` under a `patterns/` directory and read paths relative t
 |---|---|
 | Router — read this first | `patterns/INDEX.md` |
 | General rules and scope modes | `patterns/accessibility.instructions.md` |
-| One-line catalog of all 40 | `docs/quick-reference.md` |
+| One-line catalog of all 43 | `docs/quick-reference.md` |
 | Automated checks | `docs/verification.md` |
 | The patterns themselves | `patterns/<name>.instructions.md` |

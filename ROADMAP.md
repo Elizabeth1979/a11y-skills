@@ -33,11 +33,25 @@ is "trust this over the model's priors", that gap is the biggest risk in the rep
   behaviour as universal.
 - **Provenance.** For each pattern derived from an APG reference implementation, link the APG
   pattern it derives from. Good practice, and it heads off licensing ambiguity.
-- **WCAG 2.2 sweep.** Content references 2.1 and 2.2 inconsistently. Audit against the nine
-  criteria 2.2 added — particularly 2.4.11 Focus Not Obscured, 2.5.7 Dragging Movements, and
-  2.5.8 Target Size, which affect several existing widget patterns.
-- **Deduplicate the boilerplate.** Several files repeat near-identical focus and labelling rules.
-  Each repetition is a place the guidance can drift out of sync with itself.
+- **WCAG 2.2 sweep — done at A/AA.** All six criteria WCAG 2.2 added at Level A and AA now have
+  a home: `target-size`, `dragging-movements`, and `authentication` are new files; 2.4.11 went
+  into `focus-management`, 3.2.6 into `landmarks`, 3.3.7 into `forms` and `authentication`. The
+  three AAA additions are named where relevant but not developed. Like everything else here,
+  this content is written from the spec and has not been through expert review.
+- **Deduplicate the remaining boilerplate.** The cross-router duplication is fixed — the eleven
+  non-negotiables now live only in `patterns/accessibility.instructions.md` and the four routers
+  point at it. Several *pattern* files still repeat near-identical focus and labelling rules;
+  each repetition is a place the guidance can drift out of sync with itself.
+
+- **Collapse three catalogs into one.** Adding a pattern currently means editing `INDEX.md`,
+  `README.md`, and `docs/quick-reference.md`, and the validator enforces all three.
+  `quick-reference.md` substantially duplicates `INDEX.md`; generating the README table and the
+  quick reference from the index would leave one file to edit instead of three.
+
+- **Verify the packaging actually loads.** The plugin manifest, marketplace schema, and skill
+  discovery have been checked for valid JSON and required keys, not for a working
+  `/plugin install`. Until someone runs that command, the README's headline install instruction
+  is unverified.
 
 ---
 

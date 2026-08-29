@@ -117,15 +117,32 @@ All widget patterns follow the [WAI-ARIA Authoring Practices Guide (APG)](https:
 - [color-contrast.instructions.md](color-contrast.instructions.md) - WCAG color contrast requirements and accessible color usage
 - [motion-animation.instructions.md](motion-animation.instructions.md) - Accessible animations and respecting motion preferences
 
-## General Rules
+## The Non-Negotiables
 
-1. **Respect the mode** - In remediation mode, work through markup and ARIA only; the two CSS exceptions above are the whole list
-2. **Use semantic HTML** - Use appropriate HTML elements (`<button>`, `<nav>`, `<main>`, etc.) rather than generic divs
-3. **Keyboard accessibility** - Ensure all interactive elements are keyboard accessible
-4. **Focus indicators** - Never remove focus outlines without providing alternatives
-5. **Color contrast** - Text must meet WCAG contrast ratios (4.5:1 for normal text, 3:1 for large text)
-6. **Error identification** - Clearly identify and describe errors to users
-7. **Labels and instructions** - Provide clear labels for all form inputs
+**This section is the single source of truth for the rules that hold regardless of which pattern
+file you load.** The routers (`AGENTS.md`, `SKILL.md`, the Copilot and Cursor rules) point here
+rather than restating it, so there is one place to change when it changes.
+
+1. **Respect the mode.** In remediation mode, work through markup and ARIA only; the two CSS
+   exceptions above are the whole list.
+2. **Native HTML before ARIA.** `<button>`, `<a href>`, `<input>`, `<select>`, `<details>`,
+   `<dialog>` before any `role=` reimplementation. Adopting an ARIA role commits you to that
+   role's entire keyboard model; a native element is that model for free.
+3. **No redundant ARIA.** `<button role="button">` and `<nav role="navigation">` are noise. Add
+   ARIA only where native semantics fall short.
+4. **Keyboard operability.** Every interactive element reachable, operable, escapable, and in a
+   sensible order.
+5. **Visible focus.** Never remove a focus outline without replacing it — and make sure a sticky
+   header is not covering it (WCAG 2.2 SC 2.4.11).
+6. **An accessible name on every control.** Visible text, `<label for>`, `aria-label`, or
+   `aria-labelledby`.
+7. **Announce change.** Anything that appears, updates, or fails without a page load needs a live
+   region or a deliberate focus move.
+8. **Pointer targets are at least 24x24** unless a named exception applies (WCAG 2.2 SC 2.5.8),
+   and **anything draggable has a no-drag alternative** (SC 2.5.7).
+9. **Colour contrast.** 4.5:1 for normal text, 3:1 for large text and UI components.
+10. **Errors are identified and described**, not merely coloured red.
+11. **`aria-hidden` is not access control.** It hides from assistive technology and nothing else.
 
 ## Testing Recommendations
 

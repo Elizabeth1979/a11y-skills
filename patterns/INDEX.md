@@ -51,6 +51,7 @@ Match on what you are building, not on category names.
 | A grouped row of controls | [toolbar](toolbar.instructions.md) |
 | A resizable split pane | [windowsplitter](windowsplitter.instructions.md) |
 | Breadcrumb navigation | [breadcrumbs](breadcrumbs.instructions.md) |
+| A sign-in, registration, or two-factor form | [authentication](authentication.instructions.md) |
 
 ## Page-and-behavior routing
 
@@ -64,6 +65,9 @@ Match on what you are building, not on category names.
 | Announcing async results, toasts, cart counts, search results | [live-regions](live-regions.instructions.md) |
 | Colors, themes, text/UI contrast ratios | [color-contrast](color-contrast.instructions.md) |
 | Transitions, autoplay, parallax, `prefers-reduced-motion` | [motion-animation](motion-animation.instructions.md) |
+| Icon button sizes, dense control clusters, touch targets | [target-size](target-size.instructions.md) |
+| Drag-to-reorder, drag-to-resize, drop zones, kanban | [dragging-movements](dragging-movements.instructions.md) |
+| Re-asking for data already entered in a multi-step flow | [authentication](authentication.instructions.md) |
 | Anything not listed above | [accessibility](accessibility.instructions.md) |
 
 ## Symptom routing (bug reports and audit findings)
@@ -81,6 +85,10 @@ Match on what you are building, not on category names.
 | "Focus is lost after closing / deleting" | [focus-management](focus-management.instructions.md) |
 | "Tab order jumps around" | [focus-management](focus-management.instructions.md) + [landmarks](landmarks.instructions.md) |
 | "Animation causes discomfort / cannot be paused" | [motion-animation](motion-animation.instructions.md) |
+| "axe: touch targets must be large enough" | [target-size](target-size.instructions.md) |
+| "This can only be done by dragging" | [dragging-movements](dragging-movements.instructions.md) |
+| "Focus ring is hidden behind the sticky header" | [focus-management](focus-management.instructions.md) |
+| "Password field blocks paste / password managers" | [authentication](authentication.instructions.md) |
 
 ## After you change code
 

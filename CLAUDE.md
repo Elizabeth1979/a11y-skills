@@ -8,14 +8,14 @@ use `skills/accessibility/SKILL.md` and route through `patterns/INDEX.md`.
 ## What this repository is
 
 A documentation library, not an application. There is no `src/`, no build step, and no runtime.
-It ships 40 markdown pattern files plus the packaging that lets four different agent ecosystems
+It ships 43 markdown pattern files plus the packaging that lets four different agent ecosystems
 find the right one.
 
 ```
-patterns/            40 pattern files + INDEX.md, the single source of truth
+patterns/            43 pattern files + INDEX.md, the single source of truth
   INDEX.md           routing table: UI element or axe finding -> exactly one file
 docs/
-  quick-reference.md one-line catalog of all 40
+  quick-reference.md one-line catalog of all 43
   verification.md    checks an agent can actually run
 skills/accessibility/SKILL.md    Claude Code skill (router)
 .claude-plugin/      plugin + marketplace manifests
@@ -30,7 +30,7 @@ pattern text into a router file, stop — the routers exist so that the content 
 
 ## The one rule that shapes everything
 
-Loading all 40 pattern files costs roughly 130,000 tokens and makes output *worse*, because the
+Loading all 43 pattern files costs roughly 131,000 tokens and makes output *worse*, because the
 rules that matter get buried. Every design decision here follows from that:
 
 - Routers are short and stay short. They point; they do not teach.

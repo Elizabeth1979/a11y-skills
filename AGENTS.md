@@ -6,7 +6,7 @@ GitHub Copilot, OpenAI Codex, Google Jules, Aider, and others.
 
 ## What this library is
 
-40 accessibility pattern files covering every widget in the
+43 accessibility pattern files covering every widget in the
 [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/) plus the cross-cutting
 concerns APG does not: focus management, live regions, colour contrast, and motion. Each file
 carries critical rules, correct and incorrect examples, framework snippets, WCAG references, and
@@ -17,22 +17,21 @@ an implementation checklist.
 `patterns/INDEX.md` is a router: a decision table that maps a UI element, or an axe/Lighthouse
 finding, to exactly one pattern file. Read the index, open the single file it points to, and stop.
 
-Files average 12 KB. Loading all 40 costs roughly 130,000 tokens and measurably degrades output
+Files average 12 KB. Loading all 43 costs roughly 131,000 tokens and measurably degrades output
 quality — the relevant rules get buried under 39 files of irrelevant ones. Progressive disclosure
 is not a nicety here; it is how the library is designed to work.
 
 ## Rules that apply to every UI change
 
-1. **Native HTML first.** `<button>`, `<a href>`, `<input>`, `<select>`, `<details>`, `<dialog>`
-   before any `role=` reimplementation. Adopting an ARIA role commits you to that role's entire
-   keyboard model.
-2. **No redundant ARIA.** Do not restate semantics the element already has.
-3. **Keyboard operability.** Every interactive element reachable, operable, escapable, and
-   visibly focused. Never remove a focus outline without replacing it.
-4. **Accessible names.** Visible text, `<label for>`, `aria-label`, or `aria-labelledby`.
-5. **Announce change.** Anything that appears, updates, or fails without a page load needs a live
-   region or a deliberate focus move.
-6. **`aria-hidden` is not access control.** It hides from assistive technology and nothing else.
+Eleven non-negotiables govern every UI change: native HTML before ARIA, no redundant ARIA,
+keyboard operability, visible focus, an accessible name on every control, announced change,
+24x24 pointer targets, a no-drag alternative for anything draggable, contrast, described errors,
+and `aria-hidden` never being access control.
+
+**They are written once, in the "The Non-Negotiables" section of
+`patterns/accessibility.instructions.md`.** Read that section at the start of accessibility work.
+This file deliberately does not restate them — four copies of a rule drift in four directions,
+and the routers exist to point, not to teach.
 
 ## Scope discipline
 

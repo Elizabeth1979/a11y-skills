@@ -314,6 +314,7 @@ function Link({ href, children, external }) {
 - **WCAG 2.1 Success Criterion 2.4.4**: Link Purpose (In Context) (Level A)
 - **WCAG 2.1 Success Criterion 2.4.9**: Link Purpose (Link Only) (Level AAA)
 - **WCAG 2.1 Success Criterion 4.1.2**: Name, Role, Value (Level A)
+- **WCAG 2.2 Success Criterion 2.5.8**: Target Size (Minimum) (Level AA) — see [target-size.instructions.md](target-size.instructions.md)
 
 ## Implementation Checklist
 
