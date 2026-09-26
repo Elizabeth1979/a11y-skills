@@ -1,0 +1,103 @@
+name: Publish to npm
+
+# Publishes automatically when the version in package.json changes on main,
+# so a merged release bump ships without a second manual step. The manual
+# triggers are kept for re-runs and for publishing an older commit.
+#
+# Requires an NPM_TOKEN repository secret
+# (Settings → Secrets and variables → Actions → New repository secret).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: write # push the version tag
+  id-token: write # npm provenance
+
+jobs:
+  # Decide whether there is anything to publish BEFORE installing a browser
+  # and running the suite, so an ordinary commit to main costs seconds.
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.check.outputs.version }}
+      publish: ${{ steps.check.outputs.publish }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - id: check
+        run: |
+          set -euo pipefail
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+          # Read the registry separately from the comparison. Only a 404 (never
+          # published) counts as "not published yet"; any other failure stops
+          # the run, so an outage can never look like permission to publish.
+          if OUT=$(npm view @e11i/a11y-skills versions --json 2>err.txt); then
+            PUBLISHED="$OUT"
+          elif grep -q E404 err.txt <<<"$OUT" || grep -q E404 err.txt; then
+            PUBLISHED="[]"
+          else
+            cat err.txt; exit 1
+          fi
+
+          # `versions` comes back as a bare string when only one version
+          # exists, and as an array after that. Exit 0 = already published,
+          # 3 = not yet; anything else (a crash) fails the step under set -e.
+          STATUS=0
+          node -e '
+            const [json, version] = process.argv.slice(1);
+            const parsed = JSON.parse(json);
+            const all = Array.isArray(parsed) ? parsed : [parsed];
+            process.exit(all.includes(version) ? 0 : 3);
+          ' "$PUBLISHED" "$VERSION" || STATUS=$?
+          case "$STATUS" in
+            0) echo "publish=false" >> "$GITHUB_OUTPUT"
+               echo "::notice::$VERSION is already on npm — nothing to publish." ;;
+            3) echo "publish=true" >> "$GITHUB_OUTPUT"
+               echo "::notice::$VERSION is not on npm — publishing." ;;
+            *) echo "::error::Could not read the published versions."; exit 1 ;;
+          esac
+
+  publish:
+    needs: check
+    if: needs.check.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      # Keep the gate so a broken library can never be published.
+      - run: npm run validate
+
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Tag only after a successful publish, so a tag always means "this went
+      # out". Skipped if the tag exists, which is the case on a manual re-run.
+      - name: Tag the published version
+        env:
+          VERSION: ${{ needs.check.outputs.version }}
+        run: |
+          set -euo pipefail
+          if git rev-parse "v$VERSION" >/dev/null 2>&1; then
+            echo "::notice::Tag v$VERSION already exists — leaving it alone."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "v$VERSION" -m "v$VERSION"
+          git push origin "v$VERSION"

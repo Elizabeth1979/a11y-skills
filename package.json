@@ -1,7 +1,7 @@
 {
-  "name": "a11y-skills",
-  "version": "1.0.0",
-  "description": "Accessibility patterns for AI coding agents: 40 routed WCAG 2.2 / WAI-ARIA APG reference files, loaded on demand.",
+  "name": "@e11i/a11y-skills",
+  "version": "1.1.0",
+  "description": "Accessibility patterns for AI coding agents: routed WCAG 2.2 / WAI-ARIA APG reference files, loaded on demand.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,9 +10,27 @@
   "homepage": "https://github.com/Elizabeth1979/a11y-skills#readme",
   "bugs": "https://github.com/Elizabeth1979/a11y-skills/issues",
   "type": "module",
-  "private": true,
+  "files": [
+    "patterns/",
+    "skills/",
+    "docs/",
+    "AGENTS.md",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "validate": "node scripts/validate.mjs"
   },
-  "keywords": ["accessibility", "a11y", "wcag", "aria", "apg", "claude-code", "copilot", "cursor"]
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "aria",
+    "apg",
+    "claude-code",
+    "copilot",
+    "cursor"
+  ]
 }

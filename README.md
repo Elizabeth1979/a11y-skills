@@ -39,6 +39,15 @@ cp -r .a11y-skills/patterns .a11y-skills/docs .
 ```
 </details>
 
+### From npm, for tools
+
+Tools that link findings to a pattern can pin a version instead of copying files:
+
+```bash
+npm install @e11i/a11y-skills
+# node_modules/@e11i/a11y-skills/patterns/buttons.instructions.md
+```
+
 ### GitHub Copilot
 
 ```bash

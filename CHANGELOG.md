@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-09-26
+
 ### Added
+- **Published to npm as `@e11i/a11y-skills`**, so tools can pin a version and link to a pattern file by path (for example `@e11i/a11y-skills/patterns/buttons.instructions.md`). The package ships `patterns/`, `skills/`, `docs/`, `AGENTS.md` and this changelog.
 - **WCAG 2.2 coverage at Level A and AA.** The library badged itself WCAG 2.2 while covering
   none of the nine criteria 2.2 actually added. Three new patterns close the gap:
   - `patterns/target-size.instructions.md` — 2.5.8 Target Size (Minimum), AA, and the five exceptions
